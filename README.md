@@ -56,3 +56,5 @@ Morning arrival, mid-morning class, lunch, afternoon gym, evening dorm. The
 bell moves the day. In the classroom, Dr. Ward's placement is three spoken
 questions with dialogue choices — still a call, not a separate quiz engine.
 A connected session with nobody on the line disconnects after two minutes.
+
+<!-- Redeploy so production reads the project REACTOR_API_KEY. -->
