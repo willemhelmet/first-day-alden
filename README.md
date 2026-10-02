@@ -31,14 +31,24 @@ when you need a non-default coordinator. Leave it unset for production Reactor.
 
 ## Deploy
 
-The app is a Next.js 15 project and deploys on Vercel with no extra config.
+`pnpm build` succeeds locally. A Vercel project named **first-day-alden**
+already exists for this account, with deployment protection off, and it has
+no deployment yet.
 
-1. Import the repo as a Next.js project (root directory is the app).
-2. Set `REACTOR_API_KEY` for Production and Preview. Do not use a
-   `NEXT_PUBLIC_` name for that key.
-3. Redeploy. Guests open the URL and play; there is no GitHub or other login.
+This session could not finish the deploy:
 
-If the key is missing, the page explains how to add it instead of erroring.
+1. The git remote is Cursor Origin, and that team has not connected Origin
+   (Vercel → team Git settings → Connect Origin). Until that link exists,
+   pushes do not create deployments.
+2. `REACTOR_API_KEY` is stored on other Vercel projects as a sensitive
+   secret. This session can see the name and cannot read the value, so it
+   was not copied. Set it yourself on **first-day-alden** for Production and
+   Preview. Do not use a `NEXT_PUBLIC_` name for that key.
+
+After Origin is connected, import this repo into that project (or run
+`vercel --prod` from a logged-in CLI) and redeploy. Guests open the URL and
+play. There is no GitHub login. If the key is missing, the page explains how
+to add it instead of crashing.
 
 ## What a player does
 

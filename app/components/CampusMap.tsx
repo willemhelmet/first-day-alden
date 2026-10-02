@@ -49,7 +49,10 @@ export function CampusMap({
       {ROOMS.map((room) => {
         const people = occupants(periodId, room.id);
         const names = people
-          .map((placement) => characterById(placement.characterId)?.name.split(" ")[0])
+          .map((placement) => {
+            const name = characterById(placement.characterId)?.name ?? "";
+            return name.replace(/^Dr\.\s+/, "").replace(/^Coach\s+/, "").split(" ")[0];
+          })
           .filter(Boolean)
           .join(", ");
         const active = selected === room.id;
