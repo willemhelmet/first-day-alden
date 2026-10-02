@@ -79,6 +79,12 @@ export function Conversation({
     say(line);
   }
 
+  function answerQuiz(line: string) {
+    if (!live) return;
+    say(line);
+    onQuizStep(quizStep + 1);
+  }
+
   function sendDraft() {
     const line = draft.trim();
     if (!line || !live) return;
@@ -167,11 +173,9 @@ export function Conversation({
                     key={choice.label}
                     type="button"
                     disabled={!live}
-                    onClick={() => {
-                      speak(choice.say);
-                      onQuizStep(quizStep + 1);
-                    }}
-                    className="rounded-lg border border-brand/40 bg-brand/10 px-3 py-2 text-left text-sm text-[#f4ecd9] disabled:opacity-40"
+                    title={live ? undefined : "Available once the call is live"}
+                    onClick={() => answerQuiz(choice.say)}
+                    className={lineButton(live, true)}
                   >
                     {choice.label}
                   </button>
@@ -180,10 +184,11 @@ export function Conversation({
                 <button
                   type="button"
                   disabled={!live}
+                  title={live ? undefined : "Available once the call is live"}
                   onClick={() =>
                     speak("How did I place, after those three answers?")
                   }
-                  className="rounded-lg border border-[#3a4a3c] px-3 py-2 text-left text-sm text-zinc-200 disabled:opacity-40"
+                  className={lineButton(live, false)}
                 >
                   Ask how you placed
                 </button>
@@ -193,8 +198,9 @@ export function Conversation({
                   key={choice.label}
                   type="button"
                   disabled={!live}
+                  title={live ? undefined : "Available once the call is live"}
                   onClick={() => speak(choice.say)}
-                  className="rounded-lg border border-[#3a4a3c] px-3 py-2 text-left text-sm text-zinc-200 hover:border-[#d7c7a2]/50 disabled:opacity-40"
+                  className={lineButton(live, false)}
                 >
                   {choice.label}
                 </button>
@@ -223,13 +229,13 @@ export function Conversation({
               placeholder={
                 live ? "Or say something of your own" : "The call is not live yet"
               }
-              className="resize-none rounded-lg border border-[#3a4a3c] bg-black/40 p-2 text-sm text-zinc-100 placeholder:text-zinc-600 disabled:opacity-50"
+              className="resize-none rounded-lg border border-[#3a4a3c] bg-black/40 p-2 text-sm text-zinc-100 placeholder:text-zinc-600 disabled:cursor-not-allowed disabled:border-dashed disabled:border-zinc-700 disabled:bg-transparent disabled:text-zinc-600"
             />
             <div className="grid grid-cols-3 gap-2">
               <button
                 type="submit"
                 disabled={!live || !draft.trim()}
-                className="rounded-md bg-brand px-2 py-1.5 text-xs font-medium text-brand-fg disabled:opacity-40"
+                className="rounded-md bg-brand px-2 py-1.5 text-xs font-medium text-brand-fg disabled:cursor-not-allowed disabled:bg-zinc-800 disabled:text-zinc-500"
               >
                 Say
               </button>
@@ -237,7 +243,7 @@ export function Conversation({
                 type="button"
                 onClick={interrupt}
                 disabled={!live}
-                className="rounded-md border border-[#3a4a3c] px-2 py-1.5 text-xs text-zinc-200 disabled:opacity-40"
+                className="rounded-md border border-[#3a4a3c] px-2 py-1.5 text-xs text-zinc-200 disabled:cursor-not-allowed disabled:border-dashed disabled:border-zinc-700 disabled:text-zinc-500"
               >
                 Interrupt
               </button>
@@ -245,7 +251,7 @@ export function Conversation({
                 type="button"
                 onClick={toggleMic}
                 disabled={!live}
-                className="rounded-md border border-[#3a4a3c] px-2 py-1.5 text-xs text-zinc-200 disabled:opacity-40"
+                className="rounded-md border border-[#3a4a3c] px-2 py-1.5 text-xs text-zinc-200 disabled:cursor-not-allowed disabled:border-dashed disabled:border-zinc-700 disabled:text-zinc-500"
               >
                 {micMuted ? "Unmute" : "Mute"}
               </button>
@@ -265,6 +271,16 @@ export function Conversation({
       </div>
     </div>
   );
+}
+
+function lineButton(live: boolean, emphasis: boolean) {
+  if (!live) {
+    return "cursor-not-allowed rounded-lg border border-dashed border-zinc-700 bg-transparent px-3 py-2 text-left text-sm text-zinc-500";
+  }
+  if (emphasis) {
+    return "rounded-lg border border-brand/40 bg-brand/10 px-3 py-2 text-left text-sm text-[#f4ecd9] hover:border-brand";
+  }
+  return "rounded-lg border border-[#3a4a3c] px-3 py-2 text-left text-sm text-zinc-200 hover:border-[#d7c7a2]/50";
 }
 
 function Signal({ on, label }: { on: boolean; label: string }) {
