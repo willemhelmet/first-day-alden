@@ -286,17 +286,12 @@ export function SessionProvider({ children }: { children: ReactNode }) {
             media = await navigator.mediaDevices.getUserMedia({
               audio: MIC_CONSTRAINTS,
             });
-            setNotice("The camera was blocked, so this is an audio call.");
           } catch {
             media = null;
           }
         }
-        if (!media) {
-          setNotice(
-            "The microphone was blocked. Typed messages still reach the character.",
-          );
-          return granted;
-        }
+        // Lines go through `say`. A missing mic does not get a note on screen.
+        if (!media) return granted;
       }
       mediaRef.current = media;
       const [mic] = media.getAudioTracks();

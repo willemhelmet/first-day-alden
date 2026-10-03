@@ -15,7 +15,7 @@ to `reactor/vidu-s2-avatar`.
 
 ## Seller script
 
-Open First Day and frame it as a new student's first hours at Alden Hall, an East Coast boarding school — not a video widget. Every person on the map is a separate Vidu S2 avatar: their own portrait, voice, and persona, on a live Reactor session. Walk the morning quad, tap Sloane Vickers, and let the call connect; talk with the mic or the Say box and the lip-synced video answers. Leave, go to the classroom, and run Dr. Ward's placement as dialogue choices, which is still just talking to her. Then open a second room and a second character. The point for the room is that Reactor can carry several distinct conversational characters inside one navigable scene, which is the shape of a social sim or a narrative game, not a single floating head.
+Open First Day and frame it as a new student's first hours at Alden Hall, an East Coast boarding school — not a video widget. The morning opens on the grounds. Step into the library, sit across from Priya Nayak, and let the call connect. The only way to speak is the two lines under Across the table. She answers on a live Vidu S2 call, her own portrait and voice. The other places on the grounds still hold the rest of the day. The point for the room is that Reactor can carry several distinct conversational characters inside one navigable scene, which is the shape of a social sim or a narrative game, not a single floating head.
 
 ## Run locally
 
