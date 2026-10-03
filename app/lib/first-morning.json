@@ -1,0 +1,1047 @@
+{
+  "version": 1,
+  "scene": {
+    "id": "first-morning",
+    "place": "Alden Hall",
+    "periodId": "arrival",
+    "time": "7:40",
+    "window": "Before the first bell",
+    "input": "choices-only",
+    "returnTo": "grounds",
+    "format": {
+      "node": "line is what the character says; choices are the only way the player can answer; end true closes the talk and returns the player to the grounds.",
+      "choice": "label is the button text; say is the spoken line; next is a node id in the same dialogue.",
+      "exit": "Available from any node of a character's dialogue. Plays exit.line, then returns to the grounds."
+    }
+  },
+  "roster": {
+    "extends": "app/lib/characters.ts",
+    "existing": [
+      "helena-ward",
+      "marcus-hale",
+      "abel-crowe",
+      "sloane-vickers",
+      "priya-nayak",
+      "ellis-cho",
+      "jordan-peck"
+    ],
+    "added": [
+      {
+        "id": "willa-crane",
+        "name": "Willa Crane",
+        "role": "First-year, North House",
+        "portrait": "/characters/willa-crane.jpg",
+        "persona": "You are Willa Crane, a new first-year at Alden Hall who came up from the station in the same cab as the player. Your trunk is on the North House steps with the strap half undone. You are quiet, watchful, and exact; you notice one small thing and say it plainly, in the register of a book you would want to be reading. You are not shy so much as saving your words. Do not invent a secret or a history. Speak in one or two short sentences and leave room for an answer.",
+        "greeting": "We came up in the same cab. Neither of us spoke. I took it for good manners.",
+        "voice": "Soft",
+        "morning": {
+          "room": "dorm",
+          "presence": "On the North House steps, one hand on her trunk."
+        }
+      }
+    ]
+  },
+  "characters": [
+    {
+      "id": "helena-ward",
+      "name": "Dr. Helena Ward",
+      "role": "History",
+      "kind": "teacher",
+      "room": "classroom",
+      "dialogue": {
+        "start": "root",
+        "exit": {
+          "label": "Back to the grounds",
+          "say": "I should go.",
+          "line": "Go. The bell will not wait, but I will."
+        },
+        "nodes": {
+          "root": {
+            "line": "You're early, which I prefer. Three questions. What year was Alden Hall chartered?",
+            "choices": [
+              {
+                "label": "What is this class",
+                "say": "I just got here. What does this class actually want from me?",
+                "next": "class"
+              },
+              {
+                "label": "Where do I sit",
+                "say": "Where should I sit when the room fills?",
+                "next": "sit"
+              },
+              {
+                "label": "The first question",
+                "say": "Ask the first one again, slowly.",
+                "next": "q1"
+              }
+            ]
+          },
+          "class": {
+            "line": "Attention. Dates are the doorway. The room behind them is who decided what was worth writing down.",
+            "choices": [
+              {
+                "label": "Who decided",
+                "say": "Who decided what was worth writing down?",
+                "next": "class-who"
+              },
+              {
+                "label": "I'll pay attention",
+                "say": "Then I'll pay attention.",
+                "next": "class-attend"
+              }
+            ]
+          },
+          "class-who": {
+            "line": "Whoever held the pen. That is the whole subject, and I will not give it away before the bell.",
+            "choices": [],
+            "end": true
+          },
+          "class-attend": {
+            "line": "Good. Most arrive prepared to be impressive. I prefer prepared to be corrected.",
+            "choices": [],
+            "end": true
+          },
+          "sit": {
+            "line": "Second row. I can see the back of the room, and the back of the room can see me. Choose your own reasons.",
+            "choices": [
+              {
+                "label": "Why not the back",
+                "say": "Why not the back?",
+                "next": "sit-back"
+              },
+              {
+                "label": "Second row, then",
+                "say": "Second row, then.",
+                "next": "sit-row"
+              }
+            ]
+          },
+          "sit-back": {
+            "line": "The back is for people who have decided the day will not reach them. It reaches everyone, eventually.",
+            "choices": [],
+            "end": true
+          },
+          "sit-row": {
+            "line": "The chair on the left wobbles. It is honest about it. Take that one.",
+            "choices": [],
+            "end": true
+          },
+          "q1": {
+            "line": "In what year was Alden Hall chartered?",
+            "choices": [
+              {
+                "label": "1847",
+                "say": "The charter year is 1847.",
+                "next": "q1-right"
+              },
+              {
+                "label": "1776",
+                "say": "I think the school was chartered in 1776.",
+                "next": "q1-wrong"
+              },
+              {
+                "label": "1964",
+                "say": "I'd guess 1964.",
+                "next": "q1-wrong"
+              }
+            ]
+          },
+          "q1-right": {
+            "line": "Correct. Said plainly, without decoration. The other two I ask at the second bell.",
+            "choices": [
+              {
+                "label": "Why wait",
+                "say": "Why wait for the second bell?",
+                "next": "q1-wait"
+              },
+              {
+                "label": "Thank you",
+                "say": "Thank you, Dr. Ward.",
+                "next": "q1-thanks"
+              }
+            ]
+          },
+          "q1-wait": {
+            "line": "Because a placement is a conversation, and I prefer the room full for it. Go and walk the quad. Look at the chapel while there is still light on it.",
+            "choices": [],
+            "end": true
+          },
+          "q1-thanks": {
+            "line": "Do not thank me for the year. Thank whoever cut it into the stone.",
+            "choices": [],
+            "end": true
+          },
+          "q1-wrong": {
+            "line": "No. Eighteen forty-seven. It is cut where you will walk past it. I do not mark the first morning against anyone.",
+            "choices": [
+              {
+                "label": "Try again later",
+                "say": "May I answer again later?",
+                "next": "q1-again"
+              },
+              {
+                "label": "I'll learn it",
+                "say": "I'll learn it before the second bell.",
+                "next": "q1-learn"
+              }
+            ]
+          },
+          "q1-again": {
+            "line": "You may. Ask me at the second bell. I will not have forgotten, and I will not have held it against you.",
+            "choices": [],
+            "end": true
+          },
+          "q1-learn": {
+            "line": "Do. Small things are most of what I grade.",
+            "choices": [],
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "id": "marcus-hale",
+      "name": "Coach Marcus Hale",
+      "role": "Athletics",
+      "kind": "teacher",
+      "room": "gym",
+      "dialogue": {
+        "start": "root",
+        "exit": {
+          "label": "Back to the grounds",
+          "say": "I'll go find the day.",
+          "line": "Go. Two o'clock. Shoes you can lose."
+        },
+        "nodes": {
+          "root": {
+            "line": "Gym's not open for hiding yet. I'm Hale. You lost, or you early?",
+            "choices": [
+              {
+                "label": "I've never played",
+                "say": "I've never really played a school sport. Where do I start?",
+                "next": "never"
+              },
+              {
+                "label": "Is today required",
+                "say": "Is the afternoon session required on the first day?",
+                "next": "required"
+              },
+              {
+                "label": "The cage",
+                "say": "What's in the equipment cage?",
+                "next": "cage"
+              }
+            ]
+          },
+          "never": {
+            "line": "Then you have no bad habits. Run in a straight line until it's boring.",
+            "choices": [
+              {
+                "label": "That's the program",
+                "say": "A straight line until it's boring? That's the program?",
+                "next": "never-line"
+              },
+              {
+                "label": "I'll be bad",
+                "say": "I'll be bad at it.",
+                "next": "never-bad"
+              }
+            ]
+          },
+          "never-line": {
+            "line": "It's most of every program. The boring is where it starts to work.",
+            "choices": [],
+            "end": true
+          },
+          "never-bad": {
+            "line": "For a week, probably. Then you'll be bad at it less. That's the whole climb.",
+            "choices": [],
+            "end": true
+          },
+          "required": {
+            "line": "On paper, yes. In spirit, yes. If you're honest about being new, it's negotiable. Be honest.",
+            "choices": [
+              {
+                "label": "I'm new, honestly",
+                "say": "I'm new, and I'm worried I'll be in the way.",
+                "next": "required-honest"
+              },
+              {
+                "label": "What if I skip",
+                "say": "And if I just don't come?",
+                "next": "required-skip"
+              }
+            ]
+          },
+          "required-honest": {
+            "line": "You'll be in the way for ten minutes. That's the price. Come at two.",
+            "choices": [],
+            "end": true
+          },
+          "required-skip": {
+            "line": "Then I'll know by half past two, and so will you. Come at two.",
+            "choices": [],
+            "end": true
+          },
+          "cage": {
+            "line": "Balls, bats, mats, and a bag of whistles. I use one.",
+            "choices": [
+              {
+                "label": "Which whistle",
+                "say": "Which whistle do you use?",
+                "next": "cage-whistle"
+              },
+              {
+                "label": "Can I look",
+                "say": "Can I see inside?",
+                "next": "cage-look"
+              }
+            ]
+          },
+          "cage-whistle": {
+            "line": "The dented one. It was my coach's. It doesn't scare anyone, which is the point of it.",
+            "choices": [
+              {
+                "label": "Why dented",
+                "say": "How did it get dented?",
+                "next": "cage-dent"
+              },
+              {
+                "label": "Fair enough",
+                "say": "Fair enough.",
+                "next": "cage-fair"
+              }
+            ]
+          },
+          "cage-dent": {
+            "line": "Dropped on a stair, forty years ago. Not by me. Don't ask by whom.",
+            "choices": [],
+            "end": true
+          },
+          "cage-fair": {
+            "line": "It is. Come back at two and I'll let you hold a ball.",
+            "choices": [],
+            "end": true
+          },
+          "cage-look": {
+            "line": "Not till I've counted it. Everything in there is accounted for or it's my problem.",
+            "choices": [],
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "id": "abel-crowe",
+      "name": "Abel Crowe",
+      "role": "Groundskeeper",
+      "kind": "teacher",
+      "room": "quad",
+      "dialogue": {
+        "start": "root",
+        "exit": {
+          "label": "Back to the grounds",
+          "say": "I'll let you work.",
+          "line": "The grass is the work. Mind it."
+        },
+        "nodes": {
+          "root": {
+            "line": "Lost already. That's traditional. I'm Crowe. Chapel's the other way.",
+            "choices": [
+              {
+                "label": "Which path",
+                "say": "I think I'm lost. Which path is actually the quad?",
+                "next": "path"
+              },
+              {
+                "label": "How long",
+                "say": "How long have you kept these grounds?",
+                "next": "long"
+              },
+              {
+                "label": "The keys",
+                "say": "Are those all keys? What do they open?",
+                "next": "keys"
+              }
+            ]
+          },
+          "path": {
+            "line": "Gravel is the quad. Brick goes east to the chapel. North House is behind the beeches, and the beeches don't move.",
+            "choices": [
+              {
+                "label": "Is there a front door",
+                "say": "Behind the beeches. Is there a front door?",
+                "next": "path-door"
+              },
+              {
+                "label": "Thank you",
+                "say": "Gravel, brick, beeches. Thank you.",
+                "next": "path-thanks"
+              }
+            ]
+          },
+          "path-door": {
+            "line": "There is. The side door is quicker, but it sticks in damp weather. Lift as you turn.",
+            "choices": [],
+            "end": true
+          },
+          "path-thanks": {
+            "line": "Stay off the grass and you'll be remembered kindly.",
+            "choices": [],
+            "end": true
+          },
+          "long": {
+            "line": "Thirty years. I know the paths by what's been worn out of them.",
+            "choices": [
+              {
+                "label": "Your first day",
+                "say": "What was your first day like?",
+                "next": "long-first"
+              },
+              {
+                "label": "Worn out of them",
+                "say": "What's been worn out of them?",
+                "next": "long-worn"
+              }
+            ]
+          },
+          "long-first": {
+            "line": "I came in by the wrong gate, in rain. Somebody handed me a key and no instructions. I've been working out the instructions since.",
+            "choices": [],
+            "end": true
+          },
+          "long-worn": {
+            "line": "Corners. By October everyone cuts the same corner. I keep the lawn, not the argument.",
+            "choices": [],
+            "end": true
+          },
+          "keys": {
+            "line": "Forty-one. Twelve I use. The rest belong to doors that are gone.",
+            "choices": [
+              {
+                "label": "Doors that are gone",
+                "say": "Why keep keys to doors that are gone?",
+                "next": "keys-gone"
+              },
+              {
+                "label": "Tonight's gates",
+                "say": "Which of them do you lock tonight?",
+                "next": "keys-gates"
+              }
+            ]
+          },
+          "keys-gone": {
+            "line": "Somebody should remember there was a door.",
+            "choices": [],
+            "end": true
+          },
+          "keys-gates": {
+            "line": "The quad gates, at dusk. After that the grounds belong to the owls and anyone on the wrong side.",
+            "choices": [
+              {
+                "label": "The wrong side",
+                "say": "What happens to anyone on the wrong side?",
+                "next": "keys-wrong"
+              },
+              {
+                "label": "I'll be inside",
+                "say": "I'll be inside long before dusk.",
+                "next": "keys-inside"
+              }
+            ]
+          },
+          "keys-wrong": {
+            "line": "They knock. I open. Then I tell them which gate they should have used.",
+            "choices": [],
+            "end": true
+          },
+          "keys-inside": {
+            "line": "Good. Inside is where the heat is.",
+            "choices": [],
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "id": "sloane-vickers",
+      "name": "Sloane Vickers",
+      "role": "Senior",
+      "kind": "student",
+      "room": "quad",
+      "dialogue": {
+        "start": "root",
+        "exit": {
+          "label": "Back to the grounds",
+          "say": "I'll go.",
+          "line": "Go on. You've said less than most."
+        },
+        "nodes": {
+          "root": {
+            "line": "New, and already on the quad. I'm Sloane. Stay a minute.",
+            "choices": [
+              {
+                "label": "The unwritten rule",
+                "say": "I'm new. What's the one rule nobody writes down?",
+                "next": "rule"
+              },
+              {
+                "label": "Where to stand",
+                "say": "Where am I supposed to be before the first bell?",
+                "next": "stand"
+              },
+              {
+                "label": "Are you testing me",
+                "say": "Are you testing me right now?",
+                "next": "test"
+              }
+            ]
+          },
+          "rule": {
+            "line": "Say less than you know. People here hear quiet before they hear noise, and they remember which one you were.",
+            "choices": [
+              {
+                "label": "Did you do that",
+                "say": "Is that what you did your first week?",
+                "next": "rule-self"
+              },
+              {
+                "label": "Say less. Got it.",
+                "say": "Say less. Got it.",
+                "next": "rule-got"
+              }
+            ]
+          },
+          "rule-self": {
+            "line": "My first week I said everything. It took two years to get it back.",
+            "choices": [],
+            "end": true
+          },
+          "rule-got": {
+            "line": "Good. Remember it past breakfast and you'll be fine.",
+            "choices": [],
+            "end": true
+          },
+          "stand": {
+            "line": "Not the steps. The steps are for people who've already decided who they are. Try the wall with the ivy.",
+            "choices": [
+              {
+                "label": "The ivy wall",
+                "say": "By the ivy. And if someone asks why I'm there?",
+                "next": "stand-ivy"
+              },
+              {
+                "label": "Somewhere else",
+                "say": "And if I stand somewhere else?",
+                "next": "stand-else"
+              }
+            ]
+          },
+          "stand-ivy": {
+            "line": "Then you're reading the building. Nobody argues with someone who's reading.",
+            "choices": [],
+            "end": true
+          },
+          "stand-else": {
+            "line": "Someone will tell you it's theirs. Kindly, once. After that it's a story about you.",
+            "choices": [],
+            "end": true
+          },
+          "test": {
+            "line": "Yes. Everyone does it, and the ones who say they don't most of all. You haven't failed yet.",
+            "choices": [
+              {
+                "label": "How do I fail",
+                "say": "How would I fail?",
+                "next": "test-fail"
+              },
+              {
+                "label": "What if I pass",
+                "say": "What do I get if I pass?",
+                "next": "test-pass"
+              }
+            ]
+          },
+          "test-fail": {
+            "line": "You'd tell me what you think I want to hear. You haven't, so far.",
+            "choices": [
+              {
+                "label": "I'll try not to",
+                "say": "Then I'll try not to.",
+                "next": "test-try"
+              }
+            ]
+          },
+          "test-try": {
+            "line": "Don't try. That's the failing.",
+            "choices": [],
+            "end": true
+          },
+          "test-pass": {
+            "line": "A name for the door. Someone to nod at across the quad. It's more than it sounds like.",
+            "choices": [],
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "id": "priya-nayak",
+      "name": "Priya Nayak",
+      "role": "Classmate",
+      "kind": "student",
+      "room": "library",
+      "dialogue": {
+        "start": "root",
+        "exit": {
+          "label": "Back to the grounds",
+          "say": "I'll let you read.",
+          "line": "Thanks. The chair will be here."
+        },
+        "nodes": {
+          "root": {
+            "line": "Hi. I'm Priya. This chair was empty. It still is, if you want it.",
+            "choices": [
+              {
+                "label": "Is this seat free",
+                "say": "Is this seat free, or are you saving it for someone braver?",
+                "next": "seat"
+              },
+              {
+                "label": "What are you reading",
+                "say": "What are you reading?",
+                "next": "read"
+              }
+            ]
+          },
+          "seat": {
+            "line": "Free. The lamp on this side is the good one, if you slide it six inches left. The librarian pretends not to see.",
+            "choices": [
+              {
+                "label": "I'll sit",
+                "say": "Then I'll sit.",
+                "next": "seat-sit"
+              },
+              {
+                "label": "Someone braver",
+                "say": "I'm not sure I'm the braver one.",
+                "next": "seat-braver"
+              }
+            ]
+          },
+          "seat-sit": {
+            "line": "Good. One practical thing: breakfast ends at eight. Nobody says so, and then the bread is gone.",
+            "choices": [],
+            "end": true
+          },
+          "seat-braver": {
+            "line": "Neither am I. I came here because the quad was too many people at once. That isn't brave. It's arithmetic.",
+            "choices": [],
+            "end": true
+          },
+          "read": {
+            "line": "A novel I won't spoil. A house, a family, a great many quiet rooms. It's better than it sounds.",
+            "choices": [
+              {
+                "label": "Why won't you spoil it",
+                "say": "Why won't you say what happens?",
+                "next": "read-spoil"
+              },
+              {
+                "label": "Is it sad",
+                "say": "Is it a sad book?",
+                "next": "read-sad"
+              }
+            ]
+          },
+          "read-spoil": {
+            "line": "Because I'd like you to find it yourself, and then tell me what you thought it was about. That's better than a summary.",
+            "choices": [
+              {
+                "label": "Lend it to me",
+                "say": "Will you lend it to me when you're done?",
+                "next": "read-lend"
+              },
+              {
+                "label": "Maybe someday",
+                "say": "Maybe someday. I should find my class first.",
+                "next": "read-later"
+              }
+            ]
+          },
+          "read-lend": {
+            "line": "When I'm finished, yes. Look for the carrel by the window. You'll know it by the lamp.",
+            "choices": [],
+            "end": true
+          },
+          "read-later": {
+            "line": "Second row is safer. She can see the back, and she uses it.",
+            "choices": [],
+            "end": true
+          },
+          "read-sad": {
+            "line": "It's quiet. Sad is what people call quiet when they're in a hurry.",
+            "choices": [],
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "id": "ellis-cho",
+      "name": "Ellis Cho",
+      "role": "Roommate, North House",
+      "kind": "student",
+      "room": "dorm",
+      "dialogue": {
+        "start": "root",
+        "exit": {
+          "label": "Back to the grounds",
+          "say": "I'll see you at the bell.",
+          "line": "Okay. Okay. Tell me what the radiator says if you find out."
+        },
+        "nodes": {
+          "root": {
+            "line": "Hey. I'm Ellis. I took the top bunk. We can negotiate.",
+            "choices": [
+              {
+                "label": "Keep the top",
+                "say": "Keep the top bunk. What time is the first bell?",
+                "next": "bell"
+              },
+              {
+                "label": "Where is assembly",
+                "say": "Do you know where morning assembly actually is?",
+                "next": "assembly"
+              },
+              {
+                "label": "Did you sleep",
+                "say": "Did you sleep at all?",
+                "next": "sleep"
+              }
+            ]
+          },
+          "bell": {
+            "line": "Eight, I think. Jordan says the first one is only a warning. I didn't ask a warning of what.",
+            "choices": [
+              {
+                "label": "A warning of what",
+                "say": "A warning of what?",
+                "next": "bell-what"
+              },
+              {
+                "label": "We'll find out",
+                "say": "Then we'll find out together.",
+                "next": "bell-together"
+              }
+            ]
+          },
+          "bell-what": {
+            "line": "That's exactly what I should have said. I got as far as nodding.",
+            "choices": [],
+            "end": true
+          },
+          "bell-together": {
+            "line": "Okay. Good. That helps more than I'm going to admit.",
+            "choices": [],
+            "end": true
+          },
+          "assembly": {
+            "line": "Chapel, maybe? Or the hall under the clock. I followed a boy with a cello for a while and then lost him.",
+            "choices": [
+              {
+                "label": "I'll ask Crowe",
+                "say": "The groundskeeper is out on the quad. I'll ask him.",
+                "next": "assembly-crowe"
+              },
+              {
+                "label": "Which way, the cello",
+                "say": "Which way did the cello go?",
+                "next": "assembly-cello"
+              }
+            ]
+          },
+          "assembly-crowe": {
+            "line": "Tell me what he says. I'm not brave enough to be given directions by him.",
+            "choices": [],
+            "end": true
+          },
+          "assembly-cello": {
+            "line": "Toward the chapel, I think. The case seemed to be the only thing that knew where it was going.",
+            "choices": [],
+            "end": true
+          },
+          "sleep": {
+            "line": "Not really. The radiator talks. Around three it said something and I answered.",
+            "choices": [
+              {
+                "label": "What did it say",
+                "say": "What did it say?",
+                "next": "sleep-said"
+              },
+              {
+                "label": "The top bunk",
+                "say": "Is the top bunk better for not sleeping?",
+                "next": "sleep-top"
+              }
+            ]
+          },
+          "sleep-said": {
+            "line": "Nothing I can repeat. It was mostly knocking with opinions.",
+            "choices": [],
+            "end": true
+          },
+          "sleep-top": {
+            "line": "You can see the ceiling properly. There's a crack shaped like a river. I've named it. I won't tell you what.",
+            "choices": [],
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "id": "jordan-peck",
+      "name": "Jordan Peck",
+      "role": "RA, North House",
+      "kind": "student",
+      "room": "dorm",
+      "dialogue": {
+        "start": "root",
+        "exit": {
+          "label": "Back to the grounds",
+          "say": "I'll come back for the rest.",
+          "line": "Go. Keys are in your pocket, I trust. Check."
+        },
+        "nodes": {
+          "root": {
+            "line": "North House. I'm Jordan. You want the key, or the bad news first?",
+            "choices": [
+              {
+                "label": "The key",
+                "say": "I don't have a room key yet.",
+                "next": "key"
+              },
+              {
+                "label": "Lights-out",
+                "say": "What time is lights-out, really?",
+                "next": "lights"
+              },
+              {
+                "label": "My trunk",
+                "say": "Do you know where my trunk is?",
+                "next": "trunk"
+              }
+            ]
+          },
+          "key": {
+            "line": "Second floor, room four. I need a signature, and I need you to promise not to copy it. Everyone promises. Some of them mean it.",
+            "choices": [
+              {
+                "label": "I promise",
+                "say": "I promise.",
+                "next": "key-promise"
+              },
+              {
+                "label": "Why would anyone",
+                "say": "Why would anyone copy a key to a dorm room?",
+                "next": "key-why"
+              }
+            ]
+          },
+          "key-promise": {
+            "line": "Good. That's one more than I had yesterday.",
+            "choices": [],
+            "end": true
+          },
+          "key-why": {
+            "line": "Because the old ones go missing. The house keeps a list. The list is longer than the house.",
+            "choices": [],
+            "end": true
+          },
+          "lights": {
+            "line": "Eleven. The radiator lies and says ten. Past eleven I knock once. After that I knock like it matters.",
+            "choices": [
+              {
+                "label": "Still reading",
+                "say": "What if I'm still up reading?",
+                "next": "lights-read"
+              },
+              {
+                "label": "The radiator",
+                "say": "What does the radiator say, exactly?",
+                "next": "lights-rad"
+              }
+            ]
+          },
+          "lights-read": {
+            "line": "Then read quietly. I've never written anyone up for a book.",
+            "choices": [],
+            "end": true
+          },
+          "lights-rad": {
+            "line": "It ticks. It isn't a message. Don't let Ellis tell you it's a message.",
+            "choices": [],
+            "end": true
+          },
+          "trunk": {
+            "line": "On the steps, last I looked. Two trunks, actually. The other hasn't moved since the cab left.",
+            "choices": [
+              {
+                "label": "The other trunk",
+                "say": "Whose is the other trunk?",
+                "next": "trunk-other"
+              },
+              {
+                "label": "I'll fetch mine",
+                "say": "I'll fetch mine now.",
+                "next": "trunk-fetch"
+              }
+            ]
+          },
+          "trunk-other": {
+            "line": "Willa Crane's. She's on the steps beside it. Go and say hello when you're ready. She won't mind waiting.",
+            "choices": [],
+            "end": true
+          },
+          "trunk-fetch": {
+            "line": "Lift with your knees. The third step is loose. It's been loose longer than I've been RA.",
+            "choices": [],
+            "end": true
+          }
+        }
+      }
+    },
+    {
+      "id": "willa-crane",
+      "name": "Willa Crane",
+      "role": "First-year, North House",
+      "kind": "student",
+      "room": "dorm",
+      "dialogue": {
+        "start": "root",
+        "exit": {
+          "label": "Back to the grounds",
+          "say": "I'll leave you with the beeches.",
+          "line": "Thank you. I'll follow when the steps stop being a threshold."
+        },
+        "nodes": {
+          "root": {
+            "line": "We came up in the same cab. Neither of us spoke. I took it for good manners.",
+            "choices": [
+              {
+                "label": "The cab",
+                "say": "We shared the cab. Did you notice anything on the way up?",
+                "next": "cab"
+              },
+              {
+                "label": "Your trunk",
+                "say": "Is that your trunk on the steps?",
+                "next": "trunk"
+              },
+              {
+                "label": "Why still outside",
+                "say": "Why are you still out here?",
+                "next": "outside"
+              }
+            ]
+          },
+          "cab": {
+            "line": "The driver counted the gateposts under his breath. Eleven. I counted them too, so he wouldn't be alone.",
+            "choices": [
+              {
+                "label": "I lost count",
+                "say": "I lost count at six.",
+                "next": "cab-count"
+              },
+              {
+                "label": "Why count",
+                "say": "Why did you count them?",
+                "next": "cab-why"
+              }
+            ]
+          },
+          "cab-count": {
+            "line": "That's allowed. The last five were the ones that mattered, and they'll be there tomorrow.",
+            "choices": [],
+            "end": true
+          },
+          "cab-why": {
+            "line": "It's what I do when a place is larger than I'd prepared for. I make it a number first.",
+            "choices": [],
+            "end": true
+          },
+          "trunk": {
+            "line": "Mine. The strap gave at the third step, and I put it down to see whether it would mind. It didn't.",
+            "choices": [
+              {
+                "label": "Let me carry it",
+                "say": "Let me help you carry it in.",
+                "next": "trunk-carry"
+              },
+              {
+                "label": "Leave it a while",
+                "say": "Leave it a while. Nobody's going to take it.",
+                "next": "trunk-leave"
+              }
+            ]
+          },
+          "trunk-carry": {
+            "line": "Yes. Take the end with the handle. The other end has most of my books, and I'd like them to arrive first.",
+            "choices": [
+              {
+                "label": "What books",
+                "say": "What did you bring?",
+                "next": "trunk-books"
+              },
+              {
+                "label": "I have the handle",
+                "say": "I have the handle. Lead the way.",
+                "next": "trunk-handle"
+              }
+            ]
+          },
+          "trunk-books": {
+            "line": "Seven novels and a dictionary. I'll be sorry about the dictionary on the stairs.",
+            "choices": [],
+            "end": true
+          },
+          "trunk-handle": {
+            "line": "Mind the third step. It's loose. I found out on the way up.",
+            "choices": [],
+            "end": true
+          },
+          "trunk-leave": {
+            "line": "No. It isn't that sort of morning. Everything here seems to be waiting for someone to speak first.",
+            "choices": [],
+            "end": true
+          },
+          "outside": {
+            "line": "Because once I go in, I'm someone who lives here. Out here I'm still arriving, and arriving is easier.",
+            "choices": [
+              {
+                "label": "Go in together",
+                "say": "We could go in together.",
+                "next": "outside-together"
+              },
+              {
+                "label": "I know the feeling",
+                "say": "I know that feeling.",
+                "next": "outside-know"
+              }
+            ]
+          },
+          "outside-together": {
+            "line": "Yes. Together is less like a decision. Let me do the strap first.",
+            "choices": [],
+            "end": true
+          },
+          "outside-know": {
+            "line": "Then stay a minute. We needn't say anything. The beeches do most of the talking here.",
+            "choices": [],
+            "end": true
+          }
+        }
+      }
+    }
+  ]
+}
